@@ -1,6 +1,6 @@
-package cn.ofs;
+package cn.ofs.thread.nio;
 
-public class TreadDemo {
+public class NioDemo {
 
     public static void main(String[] args) {
 
