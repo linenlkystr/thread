@@ -9,6 +9,7 @@ import java.util.Iterator;
 public class NioDemo {
 
     private Selector selector;
+    private static final String LOCLA_CHARSET = "UTF-8";
 
     public void initServer(int port) throws IOException {
 
@@ -20,10 +21,10 @@ public class NioDemo {
 
         serverSocketChannel.register(this.selector, SelectionKey.OP_ACCEPT);
 
-        System.out.println("服务器启动成功。。。");
+        System.out.println("服务器启动成功: " + port);
     }
 
-    public void clientLisener() throws IOException {
+    public void clientListener() throws IOException {
 
         while (true) {
 
@@ -59,7 +60,7 @@ public class NioDemo {
                 System.out.println("服务端收到信息：" + msg);
 
                 //回写数据
-                ByteBuffer writeBackBuffer = ByteBuffer.wrap("receive data".getBytes("GBK"));
+                ByteBuffer writeBackBuffer = ByteBuffer.wrap(("服务端收到信息：" + msg).getBytes(LOCLA_CHARSET));
                 channel.write(writeBackBuffer);// 将消息回送给客户端
             } else {
                 System.out.println("客户端关闭咯...");
@@ -73,6 +74,6 @@ public class NioDemo {
 
         NioDemo nioDemo = new NioDemo();
         nioDemo.initServer(8088);
-        nioDemo.clientLisener();
+        nioDemo.clientListener();
     }
 }

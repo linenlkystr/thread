@@ -16,7 +16,7 @@ public class BioDemo {
 
         while (true) {
 
-            Socket socket = serverSocket.accept();
+            Socket socket = serverSocket.accept();//阻塞点
             System.out.println("有客户端连接：" + socket.getRemoteSocketAddress());
 
             InputStream inputStream = socket.getInputStream();
@@ -75,7 +75,7 @@ public class BioDemo {
 
     private void ReadData(InputStream inputStream, byte[] b) throws IOException {
         while (true) {
-            int data = inputStream.read(b);
+            int data = inputStream.read(b);//阻塞点
             if (data != -1) {
                 String info = new String(b, 0, data, "GBK");
                 System.out.println(info);
